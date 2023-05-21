@@ -7,11 +7,11 @@ const char *TYPE [] = {"Grass","Poison","Fire","Flying"\
                 ,"Fighting","Dragon","Dark"
 };
 
-struct Pokemon {
+typedef struct Pokemon {
         int ID;
         char name[20];
-        int type1;
-        int type2;
+        char type1[20];
+        char type2[20];
         int total;
         int HP;
         int Attack;
@@ -20,5 +20,5 @@ struct Pokemon {
         int Sp_Defense;
         int Speed;
         int Stage;
-        int Legendary;
-};
+        char Legendary[20];
+} Pokemon;
