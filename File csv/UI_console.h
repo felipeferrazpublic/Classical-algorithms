@@ -13,13 +13,13 @@ void printPokemon(Pokemon pokemon){
     }
     printf("\n");
 
-    if (strcmp(pokemon.Legendary, "FALSE") == 0){
+    if (strcmp(pokemon.Legendary, "FALSE")==0){
         printf("ID: %d\t\tName: %s\n",pokemon.ID, pokemon.name);
     }
     else{
         printf("ID: %d\t\tName: %s\tLegendary\n", pokemon.ID, pokemon.name);
     }
-    if (strcmp(pokemon.type2, "")==0){
+    if (strcmp(pokemon.type2, "xxxx")==0){
         printf("Type: %s\tStage: %d\n", pokemon.type1, pokemon.Stage);
     }
     else{
