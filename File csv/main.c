@@ -1,5 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+int main(){
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "UI_console.h"
 
@@ -10,13 +31,21 @@ int main()
 {
     Pokemon pokedex[151];
     FILE *file = fopen("Pokemon.csv", "r");
+
+
+
+
+
+
+
+
     int result = readFile_pokemon(file, 152, pokedex);
     if (result == 0){
         printf("Erro na leitura do arquivo");
     }
-    //printPokemon(pokedex[151]);
     for(int i = 1; i < 152; i++){
         printPokemon(pokedex[i]);
     }
     return 0;
 }
+*/
