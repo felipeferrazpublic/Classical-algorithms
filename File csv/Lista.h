@@ -17,14 +17,14 @@ typedef struct Pokemon {
 typedef struct list_void {
     void *data;
 
-    int *next_no1;
-    int *before_no1;
+    list_void *next_no1;
+    list_void *before_no1;
 
-    int *next_no2;
-    int *before_no2;
+    list_void *next_no2;
+    list_void *before_no2;
 
-    int *next_no3;
-    int *before_no3;
+    list_void *next_no3;
+    list_void *before_no3;
 
 } list_void;
 
