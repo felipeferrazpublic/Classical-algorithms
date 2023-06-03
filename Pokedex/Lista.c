@@ -21,7 +21,7 @@ List *cria_lista(int size_dados, int size_refe){
 }
 
 void * aux_add_list(void *dado, void *add, int size_dado){
-    dado = malloc(li -> size_list);
+    dado = malloc(size_dado);
 
     memcpy(dado, add, size_dado);
 }
