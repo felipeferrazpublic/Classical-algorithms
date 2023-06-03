@@ -41,6 +41,7 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
 
     no->data = dado;
 
+
     for(int i = 0; i < size_refe; i++){
         if(li -> size_list == 0){
             no->ponteiro[i].pos = NULL;
@@ -49,8 +50,7 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
             li->last_no[i] = no;
         }
         else {
-
-            No *anterior, *atual = li -> first_no[i];
+            No *anterior = NULL, *atual = li -> first_no[i];
 
             while(atual != NULL && atual->key[i] < add_key[i]){
                 anterior = atual;
@@ -75,8 +75,8 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
             }
         }
         no->key[i] = add_key[i];
-        li -> size_list++;
     }
+    li -> size_list++;
     return 1;
 }
 /*
