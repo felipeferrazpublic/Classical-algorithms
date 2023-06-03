@@ -28,7 +28,7 @@ typedef struct no {
 
     void *data;
     int *key;
-    struct refe **ponteiro;
+    struct refe *ponteiro;
 
 } No;
 

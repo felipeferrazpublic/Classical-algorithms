@@ -33,18 +33,18 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
         return 0;
 
     No *no = (No *)malloc(sizeof(No));
-    no->ponteiro = (refe**) malloc(sizeof(refe*)*size_refe);
+    no->ponteiro = (refe*) malloc(sizeof(refe)*size_refe);
+    no->key = (int*) malloc(sizeof(int)*size_refe);
 
     void *dado = malloc(li->size_dado);
     memcpy(dado, add_element, li->size_dado);
 
     no->data = dado;
 
-
     for(int i = 0; i < size_refe; i++){
         if(li -> size_list == 0){
-            no->ponteiro[i]->pos = NULL;
-            no->ponteiro[i]->pre = NULL;
+            no->ponteiro[i].pos = NULL;
+            no->ponteiro[i].pre = NULL;
             li->first_no[i] = no;
             li->last_no[i] = no;
         }
@@ -54,20 +54,20 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
 
             while(atual != NULL && atual->key[i] < add_key[i]){
                 anterior = atual;
-                atual = anterior->ponteiro[i]->pos;
+                atual = anterior->ponteiro[i].pos;
             }
             if(atual == li -> first_no[i]){
-                no->ponteiro[i]->pre = NULL;
-                li->first_no[i]->ponteiro[i]->pre = no;
-                no->ponteiro[i]->pos = li->first_no[i];
+                no->ponteiro[i].pre = NULL;
+                li->first_no[i]->ponteiro[i].pre = no;
+                no->ponteiro[i].pos = li->first_no[i];
                 li->first_no[i] = no;
             } else {
-                no->ponteiro[i]->pos = anterior->ponteiro[i]->pos;
-                no->ponteiro[i]->pre = anterior;
-                anterior->ponteiro[i]->pos = no;
+                no->ponteiro[i].pos = anterior->ponteiro[i].pos;
+                no->ponteiro[i].pre = anterior;
+                anterior->ponteiro[i].pos = no;
 
                 if(atual != NULL) {
-                    atual->ponteiro[i]->pre = no;
+                    atual->ponteiro[i].pre = no;
                 }
                 else{
                     li->last_no[i] = no;
