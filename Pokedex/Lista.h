@@ -1,22 +1,6 @@
 #ifndef LISTA_H_INCLUDED
 #define LISTA_H_INCLUDED
 
-typedef struct Pokemon {
-        int ID;
-        char name[20];
-        char type1[20];
-        char type2[20];
-        int total;
-        int HP;
-        int Attack;
-        int Defense;
-        int Sp_Attack;
-        int Sp_Defense;
-        int Speed;
-        int Stage;
-        char Legendary[20];
-} Pokemon;
-
 typedef struct refe {
 
     struct no *pos;
@@ -54,6 +38,8 @@ void delete_list(List *li);
 int remove_data(List* li, int position, int parameter);
 
 int search_data(List* li, int position, int parameter, void* data);
+
+int size_list(List* li);
 
 #endif
 

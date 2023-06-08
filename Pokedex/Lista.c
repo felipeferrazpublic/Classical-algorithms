@@ -19,13 +19,6 @@ List *cria_lista(int size_dados, int size_refe){
     return li;
 
 }
-/*
-void * aux_add_list(void *dado, void *add, int size_dado){
-    dado = malloc(size_dado);
-
-    memcpy(dado, add, size_dado);
-}
-*/
 
 int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
 
@@ -161,17 +154,9 @@ int search_data(List* li, int position, int parameter, void* data){
     return 1;
 }
 
-/*
-void print_lista(List *li){
-
-    No *no = li -> first_no;
-
-    puts("Sua lista ordenada e:\n");
-    while(no != NULL){
-
-        printf("%d.\n", *((int *)no -> data));
-        no = no -> pos;
+int size_list(List* li){
+    if(li == NULL){
+        return 0;
     }
-
+    return li->size_list;
 }
-*/
