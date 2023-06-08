@@ -22,6 +22,14 @@ int main(){
     int keys4[] = {Meowth.ID, Meowth.HP, Meowth.Attack};
     add_list_sort(li, &Meowth, keys4, size_parametro);
 
+    Pokemon charmander2;
+    search_data(li, 4, 2, &charmander2);
+    printf("%s\n", charmander2.name);
+
+    remove_data(li, 1, 3);
+    printf("%d", li->size_list);
+    delete_list(li);
+
 /*
     int i;
     int x;

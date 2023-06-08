@@ -36,11 +36,8 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
     no->ponteiro = (refe*) malloc(sizeof(refe)*size_refe);
     no->key = (int*) malloc(sizeof(int)*size_refe);
 
-    void *dado = malloc(li->size_dado);
-    memcpy(dado, add_element, li->size_dado);
-
-    no->data = dado;
-
+    no->data = malloc(li->size_dado);
+    memcpy(no->data, add_element, li->size_dado);
 
     for(int i = 0; i < size_refe; i++){
         if(li -> size_list == 0){
@@ -79,39 +76,90 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
     li -> size_list++;
     return 1;
 }
-/*
-    if(li -> size_list == 0){
-        no -> pre = NULL;
-        no -> pos = NULL;
-        li -> first_no = no;
-        li -> last_no = no;
 
-    } else {
+void delete_list(List *li){
 
-        No *anterior, *atual = li -> first_no;
-
-        while(atual != NULL && atual -> key < add_key){
-            anterior = atual;
-            atual = anterior -> pos;
+    if (li != NULL){
+        No* auxList;
+        while(li->first_no[0] != NULL){
+            auxList = li->first_no[0];
+            li->first_no[0] = li->first_no[0]->ponteiro[0].pos;
+            free(auxList->data);
+            free(auxList->key);
+            free(auxList->ponteiro);
+            free(auxList);
         }
-        if(atual == li -> first_no){
-            no -> pre = NULL;
-            li -> first_no -> pre = no;
-            no -> pos = li -> first_no;
-            li -> first_no = no;
-        } else {
-            no -> pos = anterior -> pos;
-            no -> pre = anterior;
-            anterior -> pos = no;
-            if(atual != NULL)
-                atual -> pre = no;
-            else
-                li -> last_no = no;
+        free(li->last_no);
+        free(li->first_no);
+        free(li);
+    }
+}
+
+int remove_data(List* li, int position, int parameter){
+    if (li == NULL || li->first_no[parameter] == NULL){
+        return 0;
+    }
+
+    if (position > li->size_list || position < 1){
+        return 0;
+    }
+    if (parameter < 0 || parameter >= li->size_refe){
+        return 0;
+    }
+
+    No* auxList = li->first_no[parameter];
+
+    int i = 1;
+
+    while(auxList->ponteiro[parameter].pos != NULL && i < position){
+        i++;
+        auxList = auxList->ponteiro[parameter].pos;
+    }
+    for(i = 0; i < li->size_refe; i++){
+        if(auxList->ponteiro[i].pre == NULL){
+            li->first_no[i] = auxList->ponteiro[i].pos;
+        }
+        else if(auxList->ponteiro[i].pos == NULL){
+            auxList->ponteiro[i].pre->ponteiro[i].pos = NULL;
+            li->last_no[i] = auxList->ponteiro[i].pre;
+        }
+        else{
+            auxList->ponteiro[i].pre->ponteiro[i].pos = auxList->ponteiro[i].pos;
+            auxList->ponteiro[i].pos->ponteiro[i].pre = auxList->ponteiro[i].pre;
         }
     }
-    no -> key = add_key;
-    li -> size_list++;
-*/
+    free(auxList->data);
+    free(auxList->key);
+    free(auxList->ponteiro);
+    free(auxList);
+
+    li->size_list--;
+
+    return 1;
+}
+
+int search_data(List* li, int position, int parameter, void* data){
+    if (li == NULL || li->first_no[parameter] == NULL){
+        return 0;
+    }
+    if (position > li->size_list || position < 1){
+        return 0;
+    }
+    if (parameter < 0 || parameter >= li->size_refe){
+        return 0;
+    }
+    No* auxList = li->first_no[parameter];
+
+    int i = 1;
+
+    while(auxList->ponteiro[parameter].pos != NULL && i < position){
+        i++;
+        auxList = auxList->ponteiro[parameter].pos;
+    }
+    memcpy(data, auxList->data, li->size_dado);
+
+    return 1;
+}
 
 /*
 void print_lista(List *li){

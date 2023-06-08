@@ -49,7 +49,11 @@ void * aux_add_list(void *dado, void *add, int size_dado);
 
 int add_list_sort(List *li, void *add_element, int *add_key, int size_refe);
 
-void print_lista(List *li);
+void delete_list(List *li);
 
-#endif // LISTA_H_INCLUDED
+int remove_data(List* li, int position, int parameter);
+
+int search_data(List* li, int position, int parameter, void* data);
+
+#endif
 
