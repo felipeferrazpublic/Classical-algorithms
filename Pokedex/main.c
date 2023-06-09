@@ -21,6 +21,8 @@ typedef struct Pokemon {
         char Legendary[20];
 } Pokemon;
 
+void print_pokemon(Pokemon pokemon);
+
 int main(){
 
     int size_parametro = 3;
@@ -110,6 +112,10 @@ int main(){
         pokemon.Stage = atoi(stage);
 
         strcpy(pokemon.Legendary, legend_str);
+        if (pokemon.Legendary[strlen(pokemon.Legendary)-1] == '\n' ){
+            pokemon.Legendary[strlen(pokemon.Legendary)-1] = '\0';
+            //pokemon.Legendary[strlen(pokemon.Legendary)+1] = '\0';
+        }
 
         keys[0] = pokemon.ID;
         keys[1] = pokemon.HP;
@@ -128,8 +134,10 @@ int main(){
         printf("2 - imprimir um pokemon especifico\n");
         printf("3 - imprimir o ultimo\n");
         printf("4 - imprimir o primeiro\n");
+        printf("Digite a sua alternativa: \n");
 
         scanf("%d", &option);
+        system("cls");
 
         switch(option){
             case 0:
@@ -142,8 +150,10 @@ int main(){
                     printf("1 - ID\n");
                     printf("2 - HP\n");
                     printf("3 - Attack\n");
+                    printf("Digite a sua alternativa: \n");
 
                     scanf("%d", &option2);
+                    system("cls");
 
                 }while(option2<0 || option2>3);
 
@@ -153,23 +163,7 @@ int main(){
 
                 for(int i = 1; i <= size_list(li); i++){
                     search_data(li, i, option2-1, &pokemon);
-                    printf("------------------------------------------------------------------------------------------------\n");
-
-                    printf("ID: %d", pokemon.ID);
-                    printf("\t\t\tNome: %s", pokemon.name);
-                    printf("\t\tLendario: %s\n", pokemon.Legendary);
-
-                    printf("Total Pontos: %d", pokemon.total);
-                    printf("\tHp: %d", pokemon.HP);
-                    printf("\t\t\tVelocidade: %d", pokemon.Speed);
-                    printf("\t\tStagio de evolucao: %d\n", pokemon.Stage);
-
-                    printf("Attack: %d", pokemon.Attack);
-                    printf("\t\tDefesa: %d", pokemon.Defense);
-                    printf("\t\tSp. Attack: %d", pokemon.Sp_Attack);
-                    printf("\t\tSp. Defesa: %d\n", pokemon.Sp_Defense);
-
-                    printf("------------------------------------------------------------------------------------------------\n\n");
+                    print_pokemon(pokemon);
                 }
                 break;
             case 2:
@@ -180,40 +174,68 @@ int main(){
                     printf("1 - ID\n");
                     printf("2 - HP\n");
                     printf("3 - Attack\n");
+                    printf("Digite a sua alternativa: \n");
 
                     scanf("%d", &option2);
+                    system("cls");
 
                 }while(option2<0 || option2>3);
+
+                if(option2 == 0){
+                    break;
+                }
 
                 int position;
                 printf("Qual a posicao: \n");
                 scanf("%d", &position);
 
+                if (!search_data(li, position, option2-1, &pokemon)){
+                    printf("posicao nao existente\n");
+                    break;
+                }
+                print_pokemon(pokemon);
+                break;
+            case 3:
+                do{
+                    system("cls");
+                    printf("Qual a ordem do ultimo: \n");
+                    printf("0 - voltar\n");
+                    printf("1 - ID\n");
+                    printf("2 - HP\n");
+                    printf("3 - Attack\n");
+                    printf("Digite a sua alternativa: \n");
+
+                    scanf("%d", &option2);
+                    system("cls");
+
+                }while(option2<0 || option2>3);
+
                 if(option2 == 0){
                     break;
                 }
-                search_data(li, position, option2-1, &pokemon);
-                printf("------------------------------------------------------------------------------------------------\n");
-
-                printf("ID: %d", pokemon.ID);
-                printf("\t\t\tNome: %s", pokemon.name);
-                printf("\t\tLendario: %s\n", pokemon.Legendary);
-
-                printf("Total Pontos: %d", pokemon.total);
-                printf("\tHp: %d", pokemon.HP);
-                printf("\t\t\tVelocidade: %d", pokemon.Speed);
-                printf("\t\tStagio de evolucao: %d\n", pokemon.Stage);
-
-                printf("Attack: %d", pokemon.Attack);
-                printf("\t\tDefesa: %d", pokemon.Defense);
-                printf("\t\tSp. Attack: %d", pokemon.Sp_Attack);
-                printf("\t\tSp. Defesa: %d\n", pokemon.Sp_Defense);
-
-                printf("------------------------------------------------------------------------------------------------\n\n");
-                break;
-            case 3:
+                search_data(li, size_list(li), option2-1, &pokemon);
+                print_pokemon(pokemon);
                 break;
             case 4:
+                do{
+                    system("cls");
+                    printf("Qual a ordem do primeiro: \n");
+                    printf("0 - voltar\n");
+                    printf("1 - ID\n");
+                    printf("2 - HP\n");
+                    printf("3 - Attack\n");
+                    printf("Digite a sua alternativa: \n");
+
+                    scanf("%d", &option2);
+                    system("cls");
+
+                }while(option2<0 || option2>3);
+
+                if(option2 == 0){
+                    break;
+                }
+                search_data(li, 1, option2-1, &pokemon);
+                print_pokemon(pokemon);
                 break;
             default:
                 printf("alternativa incorreta\n");
@@ -221,19 +243,33 @@ int main(){
         }
     }while(option!=0);
 
-
-/*
-    for(int i = 1; i <= size_list(li); i++){
-        if (search_data(li, i, 0, &pokemon)){
-            printf("%s\n", pokemon.name);
-        }
-    }
-
-    remove_data(li, 1, 3);
-    printf("%d", li->size_list);
-*/
-
     delete_list(li);
 
     return 0;
+}
+
+void print_pokemon(Pokemon pokemon){
+    printf("------------------------------------------------------------------------------------------------\n");
+
+    printf("ID: %d", pokemon.ID);
+    printf("\t\t\tNome: %s", pokemon.name);
+    if (strlen(pokemon.name) >= 10){
+        printf("\tLendario: %s\n", pokemon.Legendary);
+    }
+    else{
+        printf("\t\tLendario: %s\n", pokemon.Legendary);
+    }
+
+
+    printf("Total Pontos: %d", pokemon.total);
+    printf("\tHp: %d", pokemon.HP);
+    printf("\t\t\tVelocidade: %d", pokemon.Speed);
+    printf("\t\tStagio de evolucao: %d\n", pokemon.Stage);
+
+    printf("Attack: %d", pokemon.Attack);
+    printf("\t\tDefesa: %d", pokemon.Defense);
+    printf("\t\tSp. Attack: %d", pokemon.Sp_Attack);
+    printf("\t\tSp. Defesa: %d\n", pokemon.Sp_Defense);
+
+    printf("------------------------------------------------------------------------------------------------\n\n");
 }
