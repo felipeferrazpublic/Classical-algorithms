@@ -260,9 +260,21 @@ void print_pokemon(Pokemon pokemon){
         printf("\t\tLendario: %s\n", pokemon.Legendary);
     }
 
+    printf("Tipo 1: %s", pokemon.type1);
 
-    printf("Total Pontos: %d", pokemon.total);
-    printf("\tHp: %d", pokemon.HP);
+    if (strlen(pokemon.type1) < 8){
+        printf("\t");
+    }
+
+    if (strcmp(pokemon.type2, "xxxx")){
+        printf("\tTipo 2: %s\t", pokemon.type2);
+    }
+    else{
+        printf("\tTipo 2: \t");
+    }
+    printf("\tTotal Pontos: %d\n", pokemon.total);
+
+    printf("Hp: %d", pokemon.HP);
     printf("\t\t\tVelocidade: %d", pokemon.Speed);
     printf("\t\tStagio de evolucao: %d\n", pokemon.Stage);
 
