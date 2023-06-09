@@ -1,7 +1,12 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "lista.h"
+
+/*
+    Cria a lista com nó descritor baseado no tamanho dos
+    dados que serão guardados e a quantidade de ordenações
+    diferentes
+*/
 
 List *cria_lista(int size_dados, int size_refe){
 
@@ -19,6 +24,19 @@ List *cria_lista(int size_dados, int size_refe){
     return li;
 
 }
+
+/*
+    add_list_sort(): Adiciona um elemento de forma ordenada,
+    baseado nas diferentes ordenações da lista
+
+    return: 0 se não conseguir adicionar e 1 se conseguir
+
+    li: A lista que será adicionado o dado
+    add_element: o dado que será adicionado
+    add_key: um array contendo as chaves para as ordenações
+    size_refe: A quantidade de ordenações diferente da lista
+
+*/
 
 int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
 
@@ -70,6 +88,12 @@ int add_list_sort(List *li, void *add_element, int *add_key, int size_refe){
     return 1;
 }
 
+/*
+    delete_list(): Ele libera a mémoria aloca em uma lista
+    return: void
+    li: Lista a ser liberada
+*/
+
 void delete_list(List *li){
 
     if (li != NULL){
@@ -87,6 +111,14 @@ void delete_list(List *li){
         free(li);
     }
 }
+
+/*
+    remove_data(): Remove um elemento da lista
+    return: 0 se não conseguir remover e 1 se conseguir
+    li: A lista que terá seu elemento removido
+    position: a posição do elemento na lista
+    parameter: A ordem que será usado para deletar o elemento
+*/
 
 int remove_data(List* li, int position, int parameter){
     if (li == NULL || li->first_no[parameter] == NULL){
@@ -131,6 +163,15 @@ int remove_data(List* li, int position, int parameter){
     return 1;
 }
 
+/*
+    search_data(): Busca um tipo de dado em uma lista
+    return: 0 se não conseguir achar o elemento e 1 se conseguir
+    li: A lista que será consultada
+    position: a posição do elemento na lista na ordem
+    parameter: A ordem que será usado para deletar o elemento
+    data: um ponteiro que será armazenado o dado consultado
+*/
+
 int search_data(List* li, int position, int parameter, void* data){
     if (li == NULL || li->first_no[parameter] == NULL){
         return 0;
@@ -153,6 +194,12 @@ int search_data(List* li, int position, int parameter, void* data){
 
     return 1;
 }
+
+/*
+    size_list(): Gera o tamanho da lista
+    return: O tamanho da lista
+    li: Uma lista que será medido o seu tamanho
+*/
 
 int size_list(List* li){
     if(li == NULL){

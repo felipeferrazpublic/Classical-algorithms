@@ -25,14 +25,14 @@ void print_pokemon(Pokemon pokemon);
 
 int main(){
 
-    int size_parametro = 3;
-    List *li = cria_lista(sizeof(Pokemon), size_parametro);
+    int size_parametro = 3; // número de ordem da lista
+    List *li = cria_lista(sizeof(Pokemon), size_parametro); // criação da lista
 
-    int teste = 0;
-    char buffer[MAX_LEN];
+    int teste = 0; //testa se o tipo2 existe
+    char buffer[MAX_LEN]; // variavel que armazena a linha da leitura do arquivo
 
     Pokemon pokemon;
-    int keys[size_parametro];
+    int keys[size_parametro]; // chaves para nó da lista
 
     FILE* file = fopen("Pokemon.csv", "r");
 
@@ -41,9 +41,11 @@ int main(){
         return 1;
     }
 
-    fgets (buffer, sizeof(buffer), file);
+    fgets (buffer, sizeof(buffer), file); //pegar a primeira linha da lista que tem o nome dos paramentos
 
+    //leitura do arquivo até ler uma linha nula
     while (fgets(buffer, sizeof(buffer), file) != NULL ) {
+        // testa se tem o tipo2
         teste = 0;
         for(int i = 0; i < strlen(buffer)-1; i++){
             if (buffer[i] == buffer[i+1] && buffer[i] == ','){
@@ -66,6 +68,7 @@ int main(){
         char stage[20];
         char legend_str[20];
 
+        //armazena a leitura do arquivo nas variáveis correspondente
         strcpy(id_str, strtok ( buffer , ","));
         strcpy(nome, strtok ( NULL , ","));
         strcpy(tipo1, strtok ( NULL , ","));
@@ -78,6 +81,7 @@ int main(){
         else{
             strcpy(total_str, strtok ( NULL , ","));
         }
+
         strcpy(hp_str, strtok ( NULL , ","));
         strcpy(attack_str, strtok ( NULL , ","));
         strcpy(defense_str, strtok ( NULL , ","));
@@ -87,6 +91,7 @@ int main(){
         strcpy(stage, strtok ( NULL , ","));
         strcpy(legend_str, strtok ( NULL , ","));
 
+        //Armazena os dados do arquivo na instância pokemon
         pokemon.ID = atoi( id_str );
 
         strcpy(pokemon.name, nome);
@@ -117,14 +122,18 @@ int main(){
             //pokemon.Legendary[strlen(pokemon.Legendary)+1] = '\0';
         }
 
+        //armazena as chaves do pokemon
         keys[0] = pokemon.ID;
         keys[1] = pokemon.HP;
         keys[2] = pokemon.Attack;
+
+        //adiciona na lista a instância de pokemon
         add_list_sort(li, &pokemon, keys, size_parametro);
 
     }
 
     fclose ( file );
+
     int option = 0;
     int option2 = 0;
 
