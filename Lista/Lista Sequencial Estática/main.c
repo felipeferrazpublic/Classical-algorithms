@@ -14,6 +14,7 @@ struct student {
 typedef struct list List;
 List* create_list();
 void free_list(List* list);
+int size_list(List* list);
 
 
 // lista ponto c
@@ -41,12 +42,21 @@ void free_list(List* list){
     free(list);
 }
 
-// main.c
+int size_list(List* list){
+    if(list == NULL){
+        return -1;
+    }
+    else{
+        return list->size_element;
+    }
+}
 
 int main() {
 
     List *list;
     list = create_list();
+    int size = size_list(list);
+    
     free_list(list);
     
     return 0;
